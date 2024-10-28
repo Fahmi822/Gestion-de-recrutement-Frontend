@@ -1,0 +1,64 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-5-strong">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">RecruNet</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header>
+
+<div>
+  <video class='video' autoplay muted loop>
+    <source src="assets/video2.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<div class="content">
+  <div>
+    <h1>Bienvenue sur RecruNet</h1>
+    <p><span>Découvrez les offres d'emploi dans le domaine de l'informatique et profitez de vos chances pour décrocher le poste de vos rêves</span></p>
+    <p>Plateforme de gestion de recrutement</p>
+    <br><br><br><br>
+
+    <button label="Candidats" type="button" class="btn btn-outline-info" (click)="candidat()">Candidats</button>
+    <button label="Recruteur" type="button" class="btn btn-outline-info" (click)="recruteur()">Recruteur</button>
+    <button label="Admin" type="button" class="btn btn-outline-info" (click)="admin()">Admin</button>
+  </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-3">
+  <p>&copy; 2024 RecruNet. Tous droits réservés.</p>
+</footer>

@@ -1,0 +1,55 @@
+/* Assure que la vidéo est bien en arrière-plan */
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* La vidéo passe derrière le contenu */
+}
+
+/* Navbar */
+.navbar {
+  z-index: 10; /* Assure que la navbar reste visible au-dessus de la vidéo */
+  color: #2e58e0;
+}
+
+/* Contenu de la page */
+.content {
+  position: relative; /* Ajuste la position pour permettre un flux normal */
+  background: rgba(0, 0, 0, 0.6); /* Fond transparent pour plus de lisibilité */
+  color: #f1f1f1;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  z-index: 1; /* Assure que le contenu reste au-dessus de la vidéo */
+}
+
+/* Centre le contenu */
+.content div {
+  margin-top: 90px; /* Ajustez selon vos besoins */
+  text-align: center;
+}
+
+.content div h1 {
+  font-size: 3.25em;
+  margin: 30px;
+}
+
+.content div p {
+  margin: 15px;
+  font-size: 2.25em;
+}
+
+.content div span {
+  font-weight: bold;
+}
+section {
+  padding: 60px 0; /* Espace entre les sections */
+}
+
+h2 {
+  text-align: center; /* Centre les titres des sections */
+  margin-bottom: 30px;
+}

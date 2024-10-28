@@ -1,0 +1,97 @@
+<section class="h-100 gradient-form">
+  <!-- Video in the background -->
+  <div class="video-container">
+    <video autoplay muted loop class="background-video">
+      <source src="assets/video2.mp4" type="video/mp4" />
+    </video>
+  </div>
+  
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black" style="background-color: rgba(36, 34, 41, 0.8);">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="text-center">
+                <img src="" style="width: 185px;" alt="logo">
+                <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+              </div>
+
+              <form [formGroup]="signupForm" (ngSubmit)="submitForm()">
+                <p class="text-white">Please sign up to create your account</p>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="nom" class="form-control" formControlName="nom" placeholder="Nom" />
+                  <label class="form-label" for="nom">Nom</label>
+                  <div *ngIf="signupForm.get('nom')?.invalid && signupForm.get('nom')?.touched" class="text-danger">
+                    Nom is required.
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="prenom" class="form-control" formControlName="prenom" placeholder="Prénom" />
+                  <label class="form-label" for="prenom">Prénom</label>
+                  <div *ngIf="signupForm.get('prenom')?.invalid && signupForm.get('prenom')?.touched" class="text-danger">
+                    Prénom is required.
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="number" id="age" class="form-control" formControlName="age" placeholder="Âge" />
+                  <label class="form-label" for="age">Âge</label>
+                  <div *ngIf="signupForm.get('age')?.invalid && signupForm.get('age')?.touched" class="text-danger">
+                    Âge is required.
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="email" id="email" class="form-control" formControlName="email" placeholder="Email" />
+                  <label class="form-label" for="email">Email</label>
+                  <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
+                    Email is required.
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="tel" class="form-control" formControlName="tel" placeholder="Téléphone" />
+                  <label class="form-label" for="tel">Téléphone</label>
+                  <div *ngIf="signupForm.get('tel')?.invalid && signupForm.get('tel')?.touched" class="text-danger">
+                    Téléphone is required and must be a valid number.
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" id="motDePasse" class="form-control" formControlName="motDePasse" placeholder="Mot de Passe" />
+                  <label class="form-label" for="motDePasse">Mot de Passe</label>
+                  <div *ngIf="signupForm.get('motDePasse')?.invalid && signupForm.get('motDePasse')?.touched" class="text-danger">
+                    Mot de Passe is required and must be at least 6 characters.
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" id="confirmerMotDePasse" class="form-control" formControlName="confirmerMotDePasse" placeholder="Confirmer Mot de Passe" />
+                  <label class="form-label" for="confirmerMotDePasse">Confirmer Mot de Passe</label>
+                  <div *ngIf="signupForm.hasError('passwordMismatch') && signupForm.get('confirmerMotDePasse')?.touched" class="text-danger">
+                    Les mots de passe ne correspondent pas.
+                  </div>
+                </div>
+
+                <div class="text-center pt-1 mb-5 pb-1">
+                  <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" [disabled]="signupForm.invalid">Sign up</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">Join us as a candidate!</h4>
+                <p class="small mb-0">Fill in your details to create your account and start applying for jobs.</p>
+              </div>
+            </div>
+            <button class="btn btn-secondary" (click)="goHome()">Retour à l'accueil</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
