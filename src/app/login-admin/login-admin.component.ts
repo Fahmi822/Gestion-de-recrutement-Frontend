@@ -21,16 +21,12 @@ export class LoginAdminComponent {
       motDePasse: ['', Validators.required]
     });
   }
-  goHome() {
-    // Rediriger vers la page d'accueil
-    this.router.navigate(['/']); // Ajustez le chemin en fonction de votre route d'accueil
-  } 
 
   submitForm(): void {
     if (this.loginForm.valid) {
       this.jwtService.login(this.loginForm.value).subscribe(
         (response) => {
-          localStorage.setItem('jwt', response.token);
+          this.jwtService.saveTokenAndRole(response.token, response.role);
           this.router.navigate(['/admin-dashboard']);
         },
         (error) => {
@@ -38,5 +34,9 @@ export class LoginAdminComponent {
         }
       );
     }
+  }
+
+  goHome() {
+    this.router.navigate(['/']);
   }
 }

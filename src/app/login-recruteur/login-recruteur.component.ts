@@ -21,22 +21,28 @@ export class LoginRecruteurComponent {
       motDePasse: ['', Validators.required]
     });
   }
-  goHome() {
-    // Rediriger vers la page d'accueil
-    this.router.navigate(['/']); // Ajustez le chemin en fonction de votre route d'accueil
-  } 
 
   submitForm(): void {
     if (this.loginForm.valid) {
       this.jwtService.login(this.loginForm.value).subscribe(
         (response) => {
-          localStorage.setItem('jwt', response.token);
-          this.router.navigate(['/recruteur-dashboard']);
+          const role = response.role; // Get the role from the response
+
+          if (role === 'Recruteur') { // Ensure this matches the expected role
+            this.jwtService.saveTokenAndRole(response.token, role);
+            this.router.navigate(['/recruteur-dashboard']);
+          } else {
+            console.error('Access denied: This login is for recruiters only.');
+          }
         },
         (error) => {
           console.error('Login failed:', error);
         }
       );
     }
+  }
+
+  goHome() {
+    this.router.navigate(['/']);
   }
 }

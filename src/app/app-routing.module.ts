@@ -6,7 +6,7 @@ import { DashboardCandidatComponent } from './dashboard-candidat/dashboard-candi
 import { HomeComponent } from './home/home.component';
 import { LoginRecruteurComponent } from './login-recruteur/login-recruteur.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
-
+import{AdminDashboardComponent}from './admin-dashboard/admin-dashboard.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login-recruteur', component: LoginRecruteurComponent },
   { path: 'login-admin', component: LoginAdminComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
 ];
 
 @NgModule({

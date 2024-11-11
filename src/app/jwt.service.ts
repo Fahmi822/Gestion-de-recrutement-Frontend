@@ -8,8 +8,7 @@ const BASE_URL = 'http://localhost:8085/api/auth/';
   providedIn: 'root'
 })
 export class JwtService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   signup(signRequest: any): Observable<any> {
     return this.http.post(BASE_URL + 'signup', signRequest); 
@@ -19,16 +18,12 @@ export class JwtService {
     return this.http.post(BASE_URL + 'login', loginRequest);
   }
 
-  private createAuthorizationHeader() {
-    const jwtToken = localStorage.getItem('jwt');
-    if (jwtToken) {
-      console.log("JWT token found in local storage", jwtToken);
-      return new HttpHeaders().set(
-        "Authorization", "Bearer " + jwtToken
-      )
-    } else {
-      console.log("JWT token not found in local storage");
-    }
-    return null;
+  saveTokenAndRole(token: string, role: string): void {
+    localStorage.setItem('jwt', token);
+    localStorage.setItem('role', role);
+  }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('role');
   }
 }

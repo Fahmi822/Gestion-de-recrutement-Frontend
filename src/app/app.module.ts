@@ -11,6 +11,7 @@ import { DashboardCandidatComponent } from './dashboard-candidat/dashboard-candi
 import { HomeComponent } from './home/home.component';
 import { LoginRecruteurComponent } from './login-recruteur/login-recruteur.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
     DashboardCandidatComponent,
     HomeComponent,
     LoginRecruteurComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,
