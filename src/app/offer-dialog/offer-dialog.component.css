@@ -1,0 +1,60 @@
+.dialog-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #3f51b5;
+  }
+  
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .rounded {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .mat-form-field {
+    background-color: #f3f6f9;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .mat-form-field:hover, .mat-form-field:focus-within {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+  }
+  
+  .dialog-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .button-cancel {
+    color: #d32f2f;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-cancel:hover {
+    background-color: rgba(211, 47, 47, 0.1);
+  }
+  
+  .button-save {
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-save:hover {
+    background-color: rgba(63, 81, 181, 0.1);
+  }
+  

@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{ data.isEdit ? 'Modifier l\'Offre' : 'Ajouter une Nouvelle Offre' }}</h2>
+
+<mat-dialog-content>
+  <form (ngSubmit)="save()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Post</mat-label>
+      <input matInput [(ngModel)]="offer.post" name="post" placeholder="Poste à pourvoir" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Niveau d'étude</mat-label>
+      <input matInput [(ngModel)]="offer.niveau_etude" name="niveau_etude" placeholder="Niveau requis" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Expérience</mat-label>
+      <input matInput [(ngModel)]="offer.experince" name="experince" placeholder="Expérience souhaitée" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Langue</mat-label>
+      <input matInput [(ngModel)]="offer.langue" name="langue" placeholder="Langue requise" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nombre à recruter</mat-label>
+      <input type="number" matInput [(ngModel)]="offer.nb_a_recrut" name="nb_a_recrut" placeholder="Nombre de recrues" required min="1" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Ville</mat-label>
+      <input matInput [(ngModel)]="offer.ville" name="ville" placeholder="Lieu de travail" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>salaire</mat-label>
+        <input matInput [(ngModel)]="offer.salaire" name="salaire" placeholder="salaire" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Date d'expiration</mat-label>
+        <input matInput [(ngModel)]="offer.Dateexperation" name="Dateexpiration" placeholder="Date d'expiration" required type="date" />
+      </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" (click)="close()">Annuler</button>
+  <button mat-raised-button color="primary" [disabled]="!offer.post || !offer.niveau_etude || !offer.experience || !offer.langue || !offer.nb_a_recrut || !offer.ville" (click)="save()">Enregistrer</button>
+</mat-dialog-actions>

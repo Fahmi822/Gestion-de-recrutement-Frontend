@@ -12,6 +12,11 @@ import { HomeComponent } from './home/home.component';
 import { LoginRecruteurComponent } from './login-recruteur/login-recruteur.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { OfferDialogComponent } from './offer-dialog/offer-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +27,21 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     HomeComponent,
     LoginRecruteurComponent,
     LoginAdminComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    OfferDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
