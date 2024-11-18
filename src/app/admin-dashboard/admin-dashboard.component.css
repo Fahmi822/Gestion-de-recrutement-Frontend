@@ -26,3 +26,29 @@
 .dashboard-content {
     padding: 20px;
 }
+img.rounded-circle {
+    border-radius: 50%;
+    cursor: pointer;
+  }
+/* Personnalisation du placeholder dans le select */
+select {
+    background-color: #f0f0f0; /* Couleur de fond claire pour le select */
+    color: #6c757d; /* Couleur du texte pour le placeholder */
+  }
+  
+  select option:disabled {
+    color: #999; /* Couleur du texte pour l'option désactivée (placeholder) */
+    font-style: italic; /* Style en italique pour le placeholder */
+  }
+  
+  /* Pour l'option sélectionnée */
+  select:valid {
+    background-color: white; /* Fond blanc une fois une option sélectionnée */
+  }
+  
+  /* Option invalide */
+  select:invalid {
+    background-color: #f8d7da; /* Fond rouge pâle si non sélectionné */
+    color: #721c24; /* Couleur de texte rouge pour erreur */
+  }
+  

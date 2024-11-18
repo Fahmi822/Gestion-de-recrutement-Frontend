@@ -17,6 +17,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OfferDialogComponent } from './offer-dialog/offer-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,8 @@ import { OfferDialogComponent } from './offer-dialog/offer-dialog.component';
     LoginRecruteurComponent,
     LoginAdminComponent,
     AdminDashboardComponent,
-    OfferDialogComponent
+    OfferDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,10 @@ import { OfferDialogComponent } from './offer-dialog/offer-dialog.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

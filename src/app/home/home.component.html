@@ -14,13 +14,8 @@
         <i class="fas fa-bars"></i>
       </button>
 
-      <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="#about">About Us</a>
           </li>
@@ -31,17 +26,13 @@
             <a class="nav-link" href="#contact">Contact</a>
           </li>
         </ul>
-        <!-- Left links -->
       </div>
-      <!-- Collapsible wrapper -->
     </div>
-    <!-- Container wrapper -->
   </nav>
-  <!-- Navbar -->
 </header>
 
-<div>
-  <video class='video' autoplay muted loop>
+<div class="video-container">
+  <video class="video" autoplay muted loop>
     <source src="assets/video2.mp4" type="video/mp4" />
   </video>
 </div>
@@ -49,12 +40,33 @@
 <div class="content">
   <div>
     <h1>Bienvenue sur RecruNet</h1>
-    <p><span>Découvrez les offres d'emploi dans le domaine de l'informatique et profitez de vos chances pour décrocher le poste de vos rêves</span></p>
+    <p>
+      <span>Découvrez les offres d'emploi dans le domaine de l'informatique<br>et profitez de vos chances pour décrocher le poste de vos rêves</span>
+    </p>
     <p>Plateforme de gestion de recrutement</p>
-    <br><br><br><br>
-    <button label="Candidats" type="button" class="btn btn-outline-info" (click)="candidat()">Candidats</button>
-    <button label="Recruteur" type="button" class="btn btn-outline-info" (click)="recruteur()">Recruteur</button>
-    <button label="Admin" type="button" class="btn btn-outline-info" (click)="admin()">Admin</button>
+    <div class="buttons">
+      <button
+        type="button"
+        class="btn btn-primary custom-btn"
+        (click)="candidat()"
+      >
+        Candidats
+      </button>
+      <button
+        type="button"
+        class="btn btn-success custom-btn"
+        (click)="recruteur()"
+      >
+        Recruteurs
+      </button>
+      <button
+        type="button"
+        class="btn btn-warning custom-btn"
+        (click)="admin()"
+      >
+        Admin
+      </button>
+    </div>
   </div>
 </div>
 

@@ -27,25 +27,61 @@
     padding: 20px; /* Add padding for better spacing */
 }
 
-/* Style for the form labels */
-.form-label {
-    color: #f8f8f8; /* Ensure labels are white for visibility */
-}
-
-/* Style for the text in the form */
-.text-white {
-    color: #fff; /* Ensure text is white for visibility */
-}
-
-/* Additional padding for the card body */
-.card-body {
-    padding: 30px;
-}
-
-  
-  label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #ffffff;  /* Définit la couleur des labels en noir */
+/* Conteneur pour les boutons radio */
+.radio-group {
+    display: flex;
+    gap: 20px;
   }
+  
+  /* Style pour chaque bouton radio */
+  .radio-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  /* Cacher le bouton radio par défaut */
+  .radio-container input[type="radio"] {
+    display: none;
+  }
+  
+  /* Style pour l'élément personnalisé du bouton radio */
+  .radio-container .checkmark {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    background-color: #fff;
+  }
+  
+  /* Apparence de la case lorsque sélectionnée */
+  .radio-container input[type="radio"]:checked + .checkmark {
+    background-color: #4caf50;
+    border-color: #4caf50;
+  }
+  
+  .radio-container .checkmark:after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: white;
+    top: 4px;
+    left: 4px;
+    visibility: hidden;
+  }
+  
+  /* Afficher l'indicateur central du bouton radio lorsque sélectionné */
+  .radio-container input[type="radio"]:checked + .checkmark:after {
+    visibility: visible;
+  }
+  
+  .text-danger {
+    font-size: 12px;
+    color: red;
+  }
+  

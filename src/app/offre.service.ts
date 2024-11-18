@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OffreService {
-  private baseUrl = 'http://localhost:8085/api/offres'; // Update with your backend endpoint
+  private baseUrl = 'http://localhost:8085/api/offres'; 
 
   constructor(private http: HttpClient) {}
 
@@ -24,5 +24,8 @@ export class OffreService {
 
   deleteOffer(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/supprimer/${id}`);
+  }
+  getTotalOffre():Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/count`);
   }
 }

@@ -3,11 +3,15 @@
     <div class="col-md-12">
       <h5>Admin Management Portal</h5>
       <small *ngIf="titleAction$ | async as title">{{ title }}</small>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     </div>
   </div>
 
   <nav class="navbar navbar-expand-md breadcrumb justify-content-between">
     <div class="nav nav-pills">
+      <a class="nav-item nav-link" 
+         [class.active]="selectedTab === 'Analyse'" 
+         (click)="changeTitle('Analyse', 'Analyse')">Analyse</a>
       <a class="nav-item nav-link" 
          [class.active]="selectedTab === 'candidates'" 
          (click)="changeTitle('Candidates', 'candidates')">Candidates</a>
@@ -15,33 +19,51 @@
          [class.active]="selectedTab === 'offers'" 
          (click)="changeTitle('Offers', 'offers')">Offers</a>
     </div>
+    <div class="ml-auto">
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+        <img src="assets/icon.png" alt="Profile" width="100px" height="100" class="rounded-circle">
+      </button>
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item (click)="viewProfile()">Profile</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </div>
+    
   </nav>
 
   <!-- Candidates Tab -->
   <div *ngIf="selectedTab === 'candidates'" class="mt-4">
-    <table class="table table-bordered">
-      <thead>
+    <table class="table align-middle mb-0 bg-white">
+      <thead class="bg-light">
         <tr>
           <th>Photo</th>
           <th>ID</th>
-          <th>Name</th>
+          <th>Nom</th>
           <th>Email</th>
-          <th>Phone</th>
-          <th>Address</th>
+          <th>Téléphone</th>
+          <th>Adresse</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let candidate of candidates">
-          <td><img [src]="candidate.photo || 'assets/candidate.png'" alt="Candidate photo" width="50"></td>
+          <td>
+            <img
+              [src]="candidate.photo || 'assets/candidat.png'"
+              alt="Photo du candidat"
+              width="50"
+              class="rounded-circle"
+            />
+          </td>
           <td>{{ candidate.id }}</td>
           <td>{{ candidate.nom }} {{ candidate.prenom }}</td>
           <td>{{ candidate.email }}</td>
           <td>{{ candidate.tel }}</td>
-          <td>{{ candidate.adresse }}</td>
+          <td>{{ candidate.adresse || 'Non spécifiée' }}</td>
         </tr>
       </tbody>
     </table>
   </div>
+  
 
   <!-- Offers Tab -->
   <div *ngIf="selectedTab === 'offers'" class="mt-4">
@@ -53,7 +75,7 @@
             <h5 class="card-title">{{ offer.post }}</h5>
             <p class="card-text">
               <strong>Education Level:</strong> {{ offer.niveau_etude }}<br>
-              <strong>Experience:</strong> {{ offer.experince }}<br>
+              <strong>Experience:</strong> {{ offer.experience }}<br>
               <strong>Language:</strong> {{ offer.langue }}<br>
               <strong>City:</strong> {{ offer.ville }}<br>
               <strong>nombre a Recruité:</strong> {{ offer.nb_a_recrut }}<br>
@@ -62,6 +84,79 @@
             </p>
             <button class="btn btn-warning" (click)="editOffer(offer)">Edit</button>
             <button class="btn btn-danger" (click)="deleteOffer(offer.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectedTab === 'Analyse'" class="mt-4">
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div class="grid gap-24 row-gap-8 lg:grid-cols-5">
+        <div class="grid gap-8 lg:col-span-2">
+          <div>
+            <p class="mb-2 text-lg font-bold"> Le gestionnaire avisé</p>
+            <p class="text-gray-700">
+             
+              Un jour, un gestionnaire expérimenté proposa une solution : "Nous avons besoin d'une plateforme qui simplifie et optimise tout le processus de recrutement. Une solution centralisée pour suivre les candidatures, gérer les offres et organiser les entretiens." Dès sa mise en œuvre, tout changea. Les délais furent réduits, les recruteurs retrouvèrent leur efficacité, et les candidats apprécièrent la clarté du processus.
+            </p>
+          </div>
+         <!-- <div>
+            <p class="mb-2 text-lg font-bold">The Wise Man</p>
+            <p class="text-gray-700">
+              People have been coming to the wise man, complaining about the same problems every time. One day he told them a joke and everyone roared in laughter.
+            </p>
+          </div>-->
+        </div>
+        <div class="grid border divide-y rounded lg:col-span-3 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
+          <div class="flex flex-col justify-between p-10">
+            <div>
+              <p class="text-lg font-semibold text-gray-800 sm:text-base">
+                Total Candidates
+              </p>
+              <p class="text-2xl font-bold text-deep-purple-accent-400 sm:text-xl">
+                {{ totalCandidates }} 
+              </p>
+            </div>
+            <div>
+              <p class="text-lg font-semibold text-gray-800 sm:text-base">
+                Nombre Homme
+              </p>
+              <p class="text-2xl font-bold text-deep-purple-accent-400 sm:text-xl">
+                {{ numberOfMen }}
+              </p>
+            </div>
+            <div>
+              <p class="text-lg font-semibold text-gray-800 sm:text-base">
+                Nombre Femme
+              </p>
+              <p class="text-2xl font-bold text-deep-purple-accent-400 sm:text-xl">
+                {{ numberOfWomen }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col justify-between p-10">
+            <div>
+              <p class="text-lg font-semibold text-gray-800 sm:text-base">Users</p>
+              <p class="text-2xl font-bold text-deep-purple-accent-400 sm:text-xl">
+                86K
+              </p>
+            </div>
+            <div>
+              <p class="text-lg font-semibold text-gray-800 sm:text-base">
+                Installations
+              </p>
+              <p class="text-2xl font-bold text-deep-purple-accent-400 sm:text-xl">
+                917 000
+              </p>
+            </div>
+            <div>
+              <p class="text-lg font-semibold text-gray-800 sm:text-base">
+                Offers
+              </p>
+              <p class="text-2xl font-bold text-deep-purple-accent-400 sm:text-xl">
+                {{totalOffres}}
+              </p>
+            </div>
           </div>
         </div>
       </div>

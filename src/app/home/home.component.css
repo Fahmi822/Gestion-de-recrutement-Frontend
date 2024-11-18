@@ -1,55 +1,124 @@
-/* Assure que la vidéo est bien en arrière-plan */
-.video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* La vidéo passe derrière le contenu */
+/* Style global */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Navbar */
 .navbar {
-  z-index: 10; /* Assure que la navbar reste visible au-dessus de la vidéo */
-  color: #2e58e0;
+  background-color: #343a40;
 }
 
-/* Contenu de la page */
-.content {
-  position: relative; /* Ajuste la position pour permettre un flux normal */
-  background: rgba(0, 0, 0, 0.6); /* Fond transparent pour plus de lisibilité */
-  color: #f1f1f1;
+.navbar-brand {
+  font-size: 1.8rem;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+}
+
+/* Video section */
+.video-container {
+  position: relative;
+}
+
+.video {
   width: 100%;
-  height: 100%;
-  padding: 30px;
-  z-index: 1; /* Assure que le contenu reste au-dessus de la vidéo */
+  height: auto;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
-/* Centre le contenu */
-.content div {
-  margin-top: 90px; /* Ajustez selon vos besoins */
+/* Content Section */
+.content {
   text-align: center;
+  padding: 100px 20px;
+  color: white;
 }
 
-.content div h1 {
-  font-size: 3.25em;
-  margin: 30px;
+.content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
 }
 
-.content div p {
-  margin: 15px;
-  font-size: 2.25em;
+.content p {
+  font-size: 1.4rem;
+  margin-bottom: 30px;
 }
 
-.content div span {
+/* New button styles */
+.buttons button {
+  margin: 10px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50px; /* Rounded corners for buttons */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.buttons .btn-primary {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+}
+
+.buttons .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.buttons .btn-success {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  color: white;
+}
+
+.buttons .btn-success:hover {
+  background-color: #218838;
+  border-color: #218838;
+  transform: scale(1.05);
+}
+
+.buttons .btn-warning {
+  background-color: #ffc107;
+  border: 1px solid #ffc107;
+  color: white;
+}
+
+.buttons .btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+  transform: scale(1.05);
+}
+
+/* About Section */
+#about {
+  padding: 60px 0;
+}
+
+#about h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
   font-weight: bold;
 }
-section {
-  padding: 60px 0; /* Espace entre les sections */
+
+#about p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-h2 {
-  text-align: center; /* Centre les titres des sections */
-  margin-bottom: 30px;
+/* Footer */
+footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }

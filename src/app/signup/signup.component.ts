@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
       prenom: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(18)]],
       email: ['', [Validators.required, Validators.email]],
+      genre: ['', Validators.required],
       tel: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]], // Validate phone number with exactly 8 digits
       motDePasse: ['', [Validators.required, Validators.minLength(6)]],
       confirmerMotDePasse: ['', Validators.required]

@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row mb-2 mt-2 text-center">
+      <div class="col-md-12">
+        <h5 class="font-bold text-lg">Candidate Dashboard</h5>
+      <!--  <small *ngIf="titleAction$ | async as title">{{ title }}</small>-->
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+      </div>
+    </div>
+  
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md breadcrumb justify-content-between bg-light p-3">
+      <div class="nav nav-pills">
+        <a class="nav-item nav-link active">Offers</a>
+      </div>
+      <div class="ml-auto">
+        <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="flex items-center">
+          <img src="assets/icon.png" alt="Profile" width="40" height="40" class="rounded-circle">
+        </button>
+        <mat-menu #profileMenu="matMenu">
+          <button mat-menu-item (click)="viewProfile()">View Profile</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+    </nav>
+  
+    <!-- Offers Section -->
+    <div class="mt-4">
+      <div *ngIf="offers.length === 0" class="text-center text-gray-500">
+        <p>No offers available at the moment.</p>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let offer of offers">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title font-bold">{{ offer.post }}</h5>
+              <p class="card-text">
+                <strong>Education Level:</strong> {{ offer.niveau_etude }}<br>
+                <strong>Experience:</strong> {{ offer.experience }}<br>
+                <strong>Language:</strong> {{ offer.langue }}<br>
+                <strong>City:</strong> {{ offer.ville }}<br>
+                <strong>Number to Recruit:</strong> {{ offer.nb_a_recrut }}<br>
+                <strong>Salary:</strong> {{ offer.salaire | currency:'USD' }}<br>
+                <strong>Expiration Date:</strong> {{ offer.Dateexperation | date:'dd/MM/yyyy' }}
+              </p>
+              <button
+                class="btn btn-primary"
+                [disabled]="isOfferExpired(offer.Dateexperation) || isAlreadyApplied(offer.id)"
+                (click)="applyForOffer(offer.id)">
+                Continuer pour postuler
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
