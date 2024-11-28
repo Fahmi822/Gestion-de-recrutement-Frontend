@@ -29,14 +29,9 @@
           <div class="row g-0">
             <div class="col-lg-6">
               <div class="text-center">
-                <img src=""
-                  style="width: 185px;" alt="logo">
-                <h4 class="mt-1 mb-5 pb-1"></h4>
-              </div>
-
-              <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
                 <p class="text-white">Please login to your account</p>
-
+              </div>
+              <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
                 <div class="form-outline mb-4">
                   <input type="email" id="email" class="form-control"
                     formControlName="email" placeholder="Phone number or email address" />

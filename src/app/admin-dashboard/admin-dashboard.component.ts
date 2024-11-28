@@ -141,11 +141,7 @@ export class AdminDashboardComponent implements OnInit {
     this.titleAction$.next(newTitle);
     this.selectedTab = tab;
   }
-  viewProfile() {
-    // Naviguer vers la page de profil
-    this.router.navigate(['/profile']);
-  }
-
+ 
   logout() {
     // Supprimer le token d'authentification
     localStorage.removeItem('authToken');

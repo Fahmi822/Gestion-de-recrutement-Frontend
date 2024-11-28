@@ -1,57 +1,191 @@
 <div class="container">
-    <div class="row mb-2 mt-2 text-center">
-      <div class="col-md-12">
-        <h5 class="font-bold text-lg">Candidate Dashboard</h5>
-      <!--  <small *ngIf="titleAction$ | async as title">{{ title }}</small>-->
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-      </div>
+  <div class="row mb-2 mt-2 text-center">
+    <div class="col-md-12">
+      <h5 class="font-bold text-lg">Candidate Dashboard</h5>
+      <small *ngIf="titleAction$ | async as title">{{ title }}</small>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
     </div>
-  
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-md breadcrumb justify-content-between bg-light p-3">
-      <div class="nav nav-pills">
-        <a class="nav-item nav-link active">Offers</a>
-      </div>
-      <div class="ml-auto">
-        <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="flex items-center">
-          <img src="assets/icon.png" alt="Profile" width="40" height="40" class="rounded-circle">
-        </button>
-        <mat-menu #profileMenu="matMenu">
-          <button mat-menu-item (click)="viewProfile()">View Profile</button>
-          <button mat-menu-item (click)="logout()">Logout</button>
-        </mat-menu>
-      </div>
-    </nav>
-  
-    <!-- Offers Section -->
-    <div class="mt-4">
-      <div *ngIf="offers.length === 0" class="text-center text-gray-500">
-        <p>No offers available at the moment.</p>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-4" *ngFor="let offer of offers">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title font-bold">{{ offer.post }}</h5>
-              <p class="card-text">
-                <strong>Education Level:</strong> {{ offer.niveau_etude }}<br>
-                <strong>Experience:</strong> {{ offer.experience }}<br>
-                <strong>Language:</strong> {{ offer.langue }}<br>
-                <strong>City:</strong> {{ offer.ville }}<br>
-                <strong>Number to Recruit:</strong> {{ offer.nb_a_recrut }}<br>
-                <strong>Salary:</strong> {{ offer.salaire | currency:'USD' }}<br>
-                <strong>Expiration Date:</strong> {{ offer.Dateexperation | date:'dd/MM/yyyy' }}
-              </p>
-              <button
-                class="btn btn-primary"
-                [disabled]="isOfferExpired(offer.Dateexperation) || isAlreadyApplied(offer.id)"
-                (click)="applyForOffer(offer.id)">
-                Continuer pour postuler
-              </button>
-            </div>
+  </div>
+
+  <nav class="navbar navbar-expand-md breadcrumb justify-content-between">
+    <div class="nav nav-pills">
+      <a class="nav-item nav-link" 
+         [class.active]="selectedTab === 'offers'" 
+         (click)="changeTitle('Offers', 'offers')">Offers</a>
+      <a class="nav-item nav-link" 
+         [class.active]="selectedTab === 'profil'" 
+         (click)="changeTitle('profil', 'profil')">Profil</a>
+    </div>
+    <div class="ml-auto">
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+        <img src="{{photoUrl}}" alt="Profile" width="300px" height="300" class="rounded-circle">
+      </button>
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button> 
+      </mat-menu>
+    </div>
+    Welcome {{candidatName || 'Utilisateur'}} 
+  </nav>
+  <!-- Offers Section -->
+  <div class="mt-4">
+    <div *ngIf="selectedTab === 'offers'" class="mt-4">
+    <div *ngIf="offers.length === 0" class="text-center text-gray-500">
+      <p>No offers available at the moment.</p>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let offer of offers">
+       <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title font-bold">{{ offer.post }}</h5>
+            <p class="card-text">
+              <strong>Education Level:</strong> {{ offer.niveau_etude }}<br>
+              <strong>Experience:</strong> {{ offer.experience }}<br>
+              <strong>Language:</strong> {{ offer.langue }}<br>
+              <strong>City:</strong> {{ offer.ville }}<br>
+              <strong>Number to Recruit:</strong> {{ offer.nb_a_recrut }}<br>
+              <strong>Salary:</strong> {{ offer.salaire | currency:'USD' }}<br>
+              <strong>Expiration Date:</strong> {{ offer.Dateexperation | date:'dd/MM/yyyy' }}
+            </p>
+            <button
+              class="btn btn-primary"
+              [disabled]="isOfferExpired(offer.Dateexperation) || isAlreadyApplied(offer.id)"
+              (click)="openApplyDialog(offer)">
+              Continuer pour postuler
+            </button>
           </div>
         </div>
       </div>
     </div>
+    </div>
   </div>
-  
+  <div class="mt-4">
+    <div *ngIf="selectedTab === 'profil'" class="mt-4">
+          <div class="row">
+            <!-- Photo de Profil -->
+            <div class="col-md-4 text-center">
+              <h5 class="font-bold">Photo de Profil</h5>
+             <img
+              [src]="candidat.photo || 'assets/default-profile.png'"
+              alt="Photo de Profil"
+                width="150"
+                height="200"
+                class="shadow"
+              style="border-radius: 5px; object-fit: cover;"
+              />
+              <div class="mt-3">
+                <input type="file" (change)="onPhotoChange($event)" class="form-control-file" name="modifier photo"/>
+              </div>
+            </div>
+      
+            <!-- Informations Générales -->
+            <div class="col-md-8">
+              <form (ngSubmit)="onUpdateProfil()">
+                <div class="row">
+                  <!-- Nom -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="font-bold">Nom</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="candidat.nom"
+                        name="nom"
+                        required
+                      />
+                    </div>
+                  </div>
+      
+                  <!-- Prénom -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="font-bold">Prénom</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="candidat.prenom"
+                        name="prenom"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row">
+                  <!-- Email -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="font-bold">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        [(ngModel)]="candidat.email"
+                        name="email"
+                        required
+                      />
+                    </div>
+                  </div>
+      
+                  <!-- Mot de Passe -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="font-bold">Mot de Passe</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        [(ngModel)]="candidat.motDePasse"
+                        name="motDePasse"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="row">
+                  <!-- Genre -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="font-bold">Genre</label>
+                      <select class="form-control" [(ngModel)]="candidat.genre" name="genre">
+                        <option value="Homme">Homme</option>
+                        <option value="Femme">Femme</option>
+                      </select>
+                    </div>
+                  </div>
+      
+                  <!-- Téléphone -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="font-bold">Téléphone</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        [(ngModel)]="candidat.tel"
+                        name="tel"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- Adresse -->
+                <div class="form-group">
+                  <label class="font-bold">Adresse</label>
+                  <textarea
+                    class="form-control"
+                    [(ngModel)]="candidat.adresse"
+                    name="adresse"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <!-- Bouton Mettre à jour -->
+                <div class="text-center mt-4">
+                  <button type="submit" class="btn btn-primary">
+                    Mettre à jour
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>

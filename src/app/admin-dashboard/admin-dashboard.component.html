@@ -18,13 +18,16 @@
       <a class="nav-item nav-link" 
          [class.active]="selectedTab === 'offers'" 
          (click)="changeTitle('Offers', 'offers')">Offers</a>
+      <a class="nav-item nav-link" 
+         [class.active]="selectedTab === 'profil'" 
+         (click)="changeTitle('Profil', 'Profil')">Profil</a>
     </div>
     <div class="ml-auto">
       <button mat-icon-button [matMenuTriggerFor]="profileMenu">
         <img src="assets/icon.png" alt="Profile" width="100px" height="100" class="rounded-circle">
+        Welcome,Admin
       </button>
       <mat-menu #profileMenu="matMenu">
-        <button mat-menu-item (click)="viewProfile()">Profile</button>
         <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     </div>
@@ -161,5 +164,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="selectedTab === 'profil'" class="mt-4">
+
   </div>
 </div>

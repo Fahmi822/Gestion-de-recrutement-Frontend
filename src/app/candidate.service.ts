@@ -25,4 +25,11 @@ export class CandidateService {
   getNumberOfWomen(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/count/women`);
   }
+  getCandidatById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/candidats/${id}`);
+  }
+  updateCandidat(id: number, candidat: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}/update-profile`, candidat);
+  }
 }
+

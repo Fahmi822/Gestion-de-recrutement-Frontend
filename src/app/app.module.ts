@@ -20,6 +20,7 @@ import { OfferDialogComponent } from './offer-dialog/offer-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ApplyDialogComponent } from './apply-dialog/apply-dialog.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     LoginAdminComponent,
     AdminDashboardComponent,
     OfferDialogComponent,
+    ApplyDialogComponent,
 
   ],
   imports: [
