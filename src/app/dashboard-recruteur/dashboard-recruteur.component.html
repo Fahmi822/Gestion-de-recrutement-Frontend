@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="row mb-2 mt-2 text-center">
+    <div class="col-md-12">
+      <h5 class="font-bold text-lg">Recruteur Dashboard</h5>
+      <small *ngIf="titleAction$ | async as title">{{ title }}</small>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-md breadcrumb justify-content-between">
+    <div class="nav nav-pills">
+      <a class="nav-item nav-link" 
+         [class.active]="selectedTab === 'offers'" 
+         (click)="changeTitle('Offers', 'offers')">Offers</a>
+      <a class="nav-item nav-link" 
+         [class.active]="selectedTab === 'demandes'" 
+         (click)="changeTitle('demandes', 'demandes')">demande</a>
+      <a class="nav-item nav-link" 
+         [class.active]="selectedTab === 'candidateur'" 
+         (click)="changeTitle('candidateur', 'candidateur')">candidateur</a>
+    </div>
+    <div class="ml-auto">
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+        <img src="" alt="Profile" width="300px" height="300" class="rounded-circle">
+      </button>
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button> 
+      </mat-menu>
+    </div>
+    Welcome {{'Recruteur'}} 
+  </nav>
+<div class="container">
+  <!-- Job Offers Section -->
+  <div *ngIf="selectedTab === 'offers'" class="mt-4">
+  <div class="row">
+    <h2 class="mb-4">Liste des Offres d'Emploi</h2>
+    <div class="col-md-4 mb-4" *ngFor="let offer of offers">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title font-bold">{{ offer.post }}</h5>
+          <p class="card-text">
+            <strong>Niveau d'Étude:</strong> {{ offer.niveau_etude }}<br>
+            <strong>Expérience:</strong> {{ offer.experience }}<br>
+            <strong>Langue:</strong> {{ offer.langue }}<br>
+            <strong>Ville:</strong> {{ offer.ville }}<br>
+            <strong>Nombre à Recruter:</strong> {{ offer.nb_a_recrut }}<br>
+            <strong>Salaire:</strong> {{ offer.salaire | currency:'USD' }}<br>
+            <strong>Date d'Expiration:</strong> {{ offer.Dateexperation | date:'dd/MM/yyyy' }}
+          </p>
+          <button class="btn btn-primary" (click)="getDemandesByOffre(offer.id)">
+            Voir les Demandes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- Affichage des Demandes -->
+      <div *ngIf="selectedTab === 'demandes'">
+        <h2 class="mb-4">Demandes pour l'Offre Sélectionnée</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Email</th>
+              <th>CV</th>
+              <th>Diplôme</th>
+              <th>Lettre de Motivation</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let demande of demandes">
+              <td>{{ demande.id }}</td>
+              <td>{{ demande.date}}</td>
+              <td>{{ demande.email }}</td>
+              <td><a [href]="demande.cvUrl" target="_blank">cvUrl</a></td>
+              <td><a [href]="demande.diplomeUrl" target="_blank">Voir Diplôme</a></td>
+              <td><a [href]="demande.lettreMotivationUrl" target="_blank">Voir Lettre</a></td>
+              <td>{{ demande.status}}</td>
+
+              <td>
+                <button class="btn btn-success" (click)="acceptDemande(demande.id)">Accepter</button>
+                <button class="btn btn-danger" (click)="refuserDemande(demande.id)">Rejeter</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="selectedTab === 'candidateur'" class="mt-4">
+      <div class="table-container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Date d'entretien</th>
+              <th>Post</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let demande of demandee">
+              <td>{{ demande.email }}</td>
+              <td>{{ demande.dateEntretien | date: 'yyyy-MM-dd HH:mm' }}</td>
+              <td>{{ demande.post }}</td>
+              <td>{{ demande.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>     
+    </div> 
+</div>
+  

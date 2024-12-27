@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtService } from '../jwt.service';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ForgotPasswordModalComponent } from '../forgot-password-modal/forgot-password-modal.component'; // Import modal
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +20,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private jwtService: JwtService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
+    private authService: AuthService,
+    public dialog: MatDialog 
   ) {}
 
   ngOnInit(): void {
@@ -34,16 +42,22 @@ export class LoginComponent implements OnInit {
           if (role === 'Candidat') { // Adjusting to match your case sensitivity
             this.jwtService.saveTokenAndRole(response.token, role);
             this.router.navigate(['/dashboard-candidat']);
+            this.toastr.success('login successful');
+            
           } else {
             this.errorMessage = 'Access denied: Only candidates can log in here.';
           }
         },
         (error) => {
-          console.error('Login failed:', error);
+          this.toastr.error('Login failed:');
           this.errorMessage = 'Login failed. Please check your credentials.';
         }
       );
     }
+  }
+
+  openForgotPasswordModal(): void {
+    this.dialog.open(ForgotPasswordModalComponent);
   }
 
   goHome() {

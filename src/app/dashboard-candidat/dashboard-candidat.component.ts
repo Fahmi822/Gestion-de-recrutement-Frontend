@@ -4,12 +4,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ApplyDialogComponent } from '../apply-dialog/apply-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DemandeService } from '../demande.service';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { JwtService } from '../jwt.service';
 import { CandidateService } from '../candidate.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-dashboard-candidat',
   templateUrl: './dashboard-candidat.component.html',
@@ -37,12 +36,12 @@ export class DashboardCandidatComponent implements OnInit {
   constructor(
     private offreService: OffreService,
     private snackBar: MatSnackBar,
-    private demandeService: DemandeService,
     private router: Router,
     private dialog: MatDialog,
     private authService: AuthService,
     private jwtService: JwtService,
     private candidateService: CandidateService,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -153,7 +152,6 @@ export class DashboardCandidatComponent implements OnInit {
             canvas.height = height;
             ctx.drawImage(img, 0, 0, width, height);
             
-            // Get the resized image as base64
             this.candidat.photo = canvas.toDataURL('image/jpeg');
           }
         };
@@ -173,11 +171,11 @@ export class DashboardCandidatComponent implements OnInit {
     // Call the service to update the candidate profile
     this.candidateService.updateCandidat(utilisateurId, this.candidat).subscribe(
       (response) => {
-        alert('Profil mis à jour avec succès.');
+        this.toastr.success('Profil mis à jour avec succès.');
       },
       (error) => {
-        console.error('Erreur lors de la mise à jour du profil:', error);
-        alert('Une erreur est survenue. Veuillez réessayer.');
+        this.toastr.error('Erreur lors de la mise à jour du profil.');
+        
       }
     );
   }

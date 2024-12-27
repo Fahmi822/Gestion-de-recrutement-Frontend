@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtService } from '../jwt.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-recruteur',
@@ -14,7 +15,8 @@ export class LoginRecruteurComponent {
   constructor(
     private fb: FormBuilder,
     private jwtService: JwtService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -26,22 +28,16 @@ export class LoginRecruteurComponent {
     if (this.loginForm.valid) {
       this.jwtService.login(this.loginForm.value).subscribe(
         (response) => {
-          const role = response.role; // Get the role from the response
-
-          if (role === 'Recruteur') { // Ensure this matches the expected role
-            this.jwtService.saveTokenAndRole(response.token, role);
+            this.jwtService.saveTokenAndRole(response.token,response.role );
             this.router.navigate(['/recruteur-dashboard']);
-          } else {
-            console.error('Access denied: This login is for recruiters only.');
-          }
-        },
+            this.toastr.success('login successful');
+          },
         (error) => {
-          console.error('Login failed:', error);
+          this.toastr.error('Login failed:');
         }
       );
     }
   }
-
   goHome() {
     this.router.navigate(['/']);
   }

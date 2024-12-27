@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Demande } from './models/Demande';
+import {DemandeWithEntretien} from './models/DemandeWithEntretien';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +27,21 @@ export class DemandeService {
 
     return this.http.post(`${this.baseUrl}/postuler`, formData);
   }
+ 
+  getDemandesByOffre(offreId: number): Observable<Demande[]> {
+    return this.http.get<Demande[]>(`${this.baseUrl}/${offreId}/demandes`);
+  }
+  
+  acceptDemande(demandeId: number): Observable<Demande> {
+    return this.http.post<Demande>(`${this.baseUrl}/${demandeId}/accepter`, {});  // Le corps de la requête peut être vide
+  }
+  refuserDemande(demandeId: number): Observable<Demande> {
+    return this.http.post<Demande>(`${this.baseUrl}/${demandeId}/refuser`, {});  // Requête POST pour refuser la demande
+  }
+  getAcceptedDemandesWithEntretiens(): Observable<DemandeWithEntretien[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/accepted-entretien`);
+  }
+  
 }
 
 

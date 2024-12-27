@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtService } from '../jwt.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-admin',
@@ -14,7 +15,8 @@ export class LoginAdminComponent {
   constructor(
     private fb: FormBuilder,
     private jwtService: JwtService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,9 +30,10 @@ export class LoginAdminComponent {
         (response) => {
           this.jwtService.saveTokenAndRole(response.token, response.role);
           this.router.navigate(['/admin-dashboard']);
+          this.toastr.success('login successful');
         },
         (error) => {
-          console.error('Login failed:', error);
+          this.toastr.error('Login failed:');
         }
       );
     }

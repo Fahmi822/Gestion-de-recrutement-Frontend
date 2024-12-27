@@ -21,6 +21,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ApplyDialogComponent } from './apply-dialog/apply-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
+import { DashboardRecruteurComponent } from './dashboard-recruteur/dashboard-recruteur.component';
+import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -35,6 +39,10 @@ import { ApplyDialogComponent } from './apply-dialog/apply-dialog.component';
     AdminDashboardComponent,
     OfferDialogComponent,
     ApplyDialogComponent,
+    DashboardRecruteurComponent,
+    ForgotPasswordModalComponent,
+    ResetPasswordComponent,
+
 
   ],
   imports: [
@@ -51,6 +59,7 @@ import { ApplyDialogComponent } from './apply-dialog/apply-dialog.component';
     MatDialogModule,
     MatMenuModule,
     MatButtonModule,
+    ToastrModule.forRoot(), // ToastrModule added
     MatSnackBarModule
   ],
   providers: [],

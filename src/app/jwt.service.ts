@@ -50,4 +50,5 @@ export class JwtService {
     const utilisateurId = localStorage.getItem('utilisateurId');
     return utilisateurId ? Number(utilisateurId) : null;
   }
+  
 }  
